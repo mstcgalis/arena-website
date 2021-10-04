@@ -10,19 +10,19 @@ let arena = new Arena();
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/api/sites', function(req, res){
-  arena.channel('place-navigate-olive').get({ page: req.query.page ? req.query.page : 1, per: 64,
+  arena.channel('danielgalis/feed').get({ page: req.query.page ? req.query.page : 1, per: 64,
     direction: 'desc',
     sort: 'position'
    })
   .then(chan => {
       res.send(chan);
-      
+
   })
   .catch(err => console.log(err));
 })
 
 app.get('/api/:site', function(req, res){
-  arena.channel(req.params.site).contents({ page: req.query.page ? req.query.page : 1, 
+  arena.channel(req.params.site).contents({ page: req.query.page ? req.query.page : 1,
     per: req.query.per ? req.query.per : 24,
     direction: 'desc',
     sort: 'position'
